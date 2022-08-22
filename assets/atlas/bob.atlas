@@ -1,0 +1,48 @@
+
+bob.png
+size: 512, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+bobRun
+  rotate: false
+  xy: 0, 4
+  size: 65, 65
+  orig: 65, 65
+  offset: 0, 0
+  index: 5
+bobRun
+  rotate: false
+  xy: 67, 0
+  size: 59, 69
+  orig: 59, 69
+  offset: 0, 0
+  index: 4
+bobRun
+  rotate: false
+  xy: 128, 0
+  size: 59, 69
+  orig: 59, 69
+  offset: 0, 0
+  index: 3
+bobRun
+  rotate: false
+  xy: 189, 3
+  size: 58, 66
+  orig: 58, 66
+  offset: 0, 0
+  index: 1
+bobRun
+  rotate: false
+  xy: 249, 3
+  size: 56, 66
+  orig: 56, 66
+  offset: 0, 0
+  index: 2
+bobRun
+  rotate: false
+  xy: 307, 1
+  size: 54, 68
+  orig: 54, 68
+  offset: 0, 0
+  index: 6
