@@ -1,0 +1,132 @@
+
+tiles.png
+size: 2048, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+anchor
+  rotate: false
+  xy: 2, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+barrel
+  rotate: false
+  xy: 94, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+barrel2
+  rotate: false
+  xy: 186, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+chest
+  rotate: false
+  xy: 278, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+decor1
+  rotate: false
+  xy: 370, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+jellyFish1
+  rotate: false
+  xy: 462, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+jellyFish2
+  rotate: false
+  xy: 554, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+jellyFish3
+  rotate: false
+  xy: 646, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+jellyFish4
+  rotate: false
+  xy: 738, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+jellyFish5
+  rotate: false
+  xy: 830, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+jellyFish6
+  rotate: false
+  xy: 922, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+jellyFish7
+  rotate: false
+  xy: 1014, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+oyster1
+  rotate: false
+  xy: 1106, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+oyster2
+  rotate: false
+  xy: 1198, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+oyster3
+  rotate: false
+  xy: 1290, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+oyster4
+  rotate: false
+  xy: 1382, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+seaweedl
+  rotate: false
+  xy: 1474, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1
+steering_wheel
+  rotate: false
+  xy: 1566, 4
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: -1

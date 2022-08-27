@@ -31,7 +31,7 @@ public class Anim {
     }
  public Anim(String atlasName,String regionsName,Animation.PlayMode playMode){
      atlas = new TextureAtlas(atlasName);
-     anm = new com.badlogic.gdx.graphics.g2d.Animation<TextureRegion>(1 / 20f, atlas.findRegions(regionsName));
+     anm = new com.badlogic.gdx.graphics.g2d.Animation<TextureRegion>(1 / 10f, atlas.findRegions(regionsName));
      anm.setPlayMode(playMode);
 
  }
