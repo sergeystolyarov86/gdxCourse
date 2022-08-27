@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="1" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="tiles" tilewidth="90" tileheight="83" spacing="2" tilecount="22" columns="22">
+  <image source="tiles.png" width="2048" height="128"/>
+  <tile id="18">
+   <animation>
+    <frame tileid="12" duration="100"/>
+    <frame tileid="13" duration="100"/>
+    <frame tileid="14" duration="100"/>
+    <frame tileid="15" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="19">
+   <animation>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+    <frame tileid="8" duration="100"/>
+    <frame tileid="9" duration="100"/>
+    <frame tileid="10" duration="100"/>
+    <frame tileid="11" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="Слой тайлов 1" width="30" height="20" offsetx="-169.333" offsety="78.6667">
+  <data encoding="base64" compression="zlib">
+   <chunk x="16" y="0" width="16" height="16">
+   eJxjYBgFo2BkAhYqmydIop3Utp8cAAAYVAAe
+  </chunk>
+   <chunk x="32" y="0" width="16" height="16">
+   eJxjYBgFww2IDLQDRgFRQHigHQAEADk8ACg=
+  </chunk>
+   <chunk x="48" y="0" width="16" height="16">
+   eJxjYBgFo2AU4AMiNDKXlUbmkgIAF8QAGg==
+  </chunk>
+   <chunk x="64" y="0" width="16" height="16">
+   eJxjYBgFwx2IDLQDRsGgBQAuMAAV
+  </chunk>
+   <chunk x="80" y="0" width="16" height="16">
+   eJxjYBgFo2AUUAqEBtoBZAIAEPAAEw==
+  </chunk>
+   <chunk x="96" y="0" width="16" height="16">
+   eJxjYBgFo2DkApGBdsAAAwAYAAAV
+  </chunk>
+  </data>
+ </layer>
+</map>

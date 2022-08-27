@@ -1,48 +1,62 @@
 
 bob.png
-size: 512, 128
+size: 256, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 bobRun
   rotate: false
-  xy: 0, 4
-  size: 65, 65
-  orig: 65, 65
+  xy: 0, 314
+  size: 90, 74
+  orig: 90, 80
   offset: 0, 0
-  index: 5
+  index: 7
 bobRun
   rotate: false
-  xy: 67, 0
-  size: 59, 69
-  orig: 59, 69
-  offset: 0, 0
-  index: 4
-bobRun
-  rotate: false
-  xy: 128, 0
-  size: 59, 69
-  orig: 59, 69
-  offset: 0, 0
-  index: 3
-bobRun
-  rotate: false
-  xy: 189, 3
-  size: 58, 66
-  orig: 58, 66
+  xy: 0, 239
+  size: 90, 73
+  orig: 90, 80
   offset: 0, 0
   index: 1
 bobRun
   rotate: false
-  xy: 249, 3
-  size: 56, 66
-  orig: 56, 66
+  xy: 92, 311
+  size: 90, 77
+  orig: 90, 80
+  offset: 0, 0
+  index: 6
+bobRun
+  rotate: false
+  xy: 0, 157
+  size: 90, 80
+  orig: 90, 80
+  offset: 0, 0
+  index: 3
+bobRun
+  rotate: false
+  xy: 92, 232
+  size: 90, 77
+  orig: 90, 80
+  offset: 0, 0
+  index: 5
+bobRun
+  rotate: false
+  xy: 0, 75
+  size: 90, 80
+  orig: 90, 80
   offset: 0, 0
   index: 2
 bobRun
   rotate: false
-  xy: 307, 1
-  size: 54, 68
-  orig: 54, 68
+  xy: 92, 150
+  size: 88, 80
+  orig: 90, 80
+  offset: 1, 0
+  index: 4
+bobRun
+  rotate: false
+  xy: 0, 0
+  size: 86, 73
+  orig: 90, 80
   offset: 0, 0
-  index: 6
+  index: 8
