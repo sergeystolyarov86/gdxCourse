@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -20,30 +21,39 @@ import com.mygdx.game.Main;
 
 public class GameScreen implements Screen {
 
+    private static final float STEP = 1f;
     int moveX;
     Anim animation;
-    boolean isInFrame = true;
-    boolean lookRight = true;
+    private boolean lookRight=true;
     private final Main game;
     private final SpriteBatch batch;
     private final Texture img;
-   private final ShapeRenderer shapeRenderer;
-   private final Rectangle startRect;
-   private OrthographicCamera camera;
-   private TiledMap map;
-   private OrthogonalTiledMapRenderer mapRenderer;
+    private final ShapeRenderer shapeRenderer;
+    private final Rectangle startRect;
+    private OrthographicCamera camera;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer mapRenderer;
+    private Rectangle mapSize;
+
     public GameScreen(Main game) {
         this.game = game;
-        shapeRenderer =new ShapeRenderer();
-        img = new Texture("gameScene.jpg");
+        shapeRenderer = new ShapeRenderer();
+        img = new Texture("gameScene.png");
         startRect = new Rectangle(0, 0, img.getWidth(), img.getHeight());
         batch = new SpriteBatch();
         animation = new Anim("atlas/bob.atlas", "bobRun", Animation.PlayMode.LOOP);
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-//        TmxMapLoader tm = new TmxMapLoader();
-//        map = tm.load("map/map.tmx");
-        map = new TmxMapLoader().load("map/карта1.tmx");
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        map = new TmxMapLoader().load("map/map.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
+
+
+        map.getLayers().get("объекты").getObjects().getByType(RectangleMapObject.class);
+        RectangleMapObject tmp = (RectangleMapObject) map.getLayers().get("объекты").getObjects().get("cam");
+        camera.position.x = tmp.getRectangle().x;
+        camera.position.y = tmp.getRectangle().y;
+        tmp = (RectangleMapObject) map.getLayers().get("объекты").getObjects().get("border");
+        mapSize = tmp.getRectangle();
 
     }
 
@@ -54,47 +64,67 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-       ScreenUtils.clear(0, 0, 1, 0);
-       camera.update();
-      //  float x = Gdx.input.getX() - animation.getFrame().getRegionWidth();
-     //   float y = Gdx.graphics.getHeight() - Gdx.input.getY() - animation.getFrame().getRegionHeight();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(startRect.x, startRect.y, startRect.width, startRect.height);
-        shapeRenderer.end();
+        // if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && mapSize.x < camera.position.x - 1) camera.position.x -= STEP;
+        //   if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && mapSize.x + mapSize.width > camera.position.x + 1)
+        //     camera.position.x += STEP;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.P)) camera.zoom -= 0.1f;
+        if (Gdx.input.isKeyPressed(Input.Keys.M)) camera.zoom += 0.1f;
+
+        ScreenUtils.clear(0, 0, 1, 0);
+        camera.update();
+        //  float x = Gdx.input.getX() - animation.getFrame().getRegionWidth();
+        //   float y = Gdx.graphics.getHeight() - Gdx.input.getY() - animation.getFrame().getRegionHeight();
+
         animation.setTime(Gdx.graphics.getDeltaTime());
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        runMan();
-        batch.draw(img,0,0);
+        moveBob();
+        batch.draw(img, 0, 0);
         batch.draw(animation.getFrame(), moveX, 105);
         batch.end();
         mapRenderer.setView(camera);
         mapRenderer.render();
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
             dispose();
             game.setScreen(new MenuScreen(game));
         }
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.rect(mapSize.x, mapSize.y, mapSize.width, mapSize.height);
+        shapeRenderer.end();
     }
-    public void runMan() {
-        if (!animation.getFrame().isFlipX() && !lookRight) animation.getFrame().flip(true, false);
-        if (animation.getFrame().isFlipX() && lookRight) animation.getFrame().flip(true, false);
 
-      //  int finish = Gdx.graphics.getWidth() - animation.getFrame().getRegionWidth();
+    public void moveBob() {
         int finish = img.getWidth() - animation.getFrame().getRegionWidth();
-        if (moveX == finish) {
-            lookRight = false;
-            isInFrame = false;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) ) {
+            if (!animation.getFrame().isFlipX() ) {
+                animation.getFrame().flip(true, false);
+
+            }
+            if (mapSize.x < camera.position.x - 1) {
+                camera.position.x -= STEP;
+            }
+            if (moveX != 0) {
+                moveX--;
+            }
         }
-        if (moveX == 0 && animation.getFrame().isFlipX()) {
-            lookRight = true;
-            isInFrame = true;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            if (animation.getFrame().isFlipX() ) {
+                animation.getFrame().flip(true, false);
+
+            }
+            if (mapSize.x + mapSize.width > camera.position.x + 1) {
+                camera.position.x += STEP;
+            }
+            if (moveX <= finish) {
+                moveX++;
+            }
         }
-        if (isInFrame) {
-            moveX++;
-        } else {
-            moveX--;
-        }
+
     }
 
     @Override
