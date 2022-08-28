@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="1" nextlayerid="2" nextobjectid="1">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="110" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="23">
  <tileset firstgid="1" name="tiles" tilewidth="90" tileheight="83" spacing="2" tilecount="22" columns="22">
   <image source="tiles.png" width="2048" height="128"/>
   <tile id="18">
@@ -22,26 +22,15 @@
    </animation>
   </tile>
  </tileset>
- <layer id="1" name="Слой тайлов 1" width="30" height="20" offsetx="-169.333" offsety="78.6667">
+ <layer id="1" name="Слой тайлов 1" width="110" height="29" offsetx="6.47872" offsety="5.50395">
   <data encoding="base64" compression="zlib">
-   <chunk x="16" y="0" width="16" height="16">
-   eJxjYBgFo2BkAhYqmydIop3Utp8cAAAYVAAe
-  </chunk>
-   <chunk x="32" y="0" width="16" height="16">
-   eJxjYBgFww2IDLQDRgFRQHigHQAEADk8ACg=
-  </chunk>
-   <chunk x="48" y="0" width="16" height="16">
-   eJxjYBgFo2AU4AMiNDKXlUbmkgIAF8QAGg==
-  </chunk>
-   <chunk x="64" y="0" width="16" height="16">
-   eJxjYBgFwx2IDLQDRsGgBQAuMAAV
-  </chunk>
-   <chunk x="80" y="0" width="16" height="16">
-   eJxjYBgFo2AUUAqEBtoBZAIAEPAAEw==
-  </chunk>
-   <chunk x="96" y="0" width="16" height="16">
-   eJxjYBgFo2DkApGBdsAAAwAYAAAV
-  </chunk>
+   eJzt1sEKgCAMANAKO3aI+v9vDc8hlNWMeu/kQdimG9p1AAAAAAAAALzN2joBdv56J1+qO7VOgFeI6ukvzU7WH9iTCuuSoTKXGktgLIAac3C8MTjenc6+H9MjWZBdOdvonj/ryIxE1xD5dwLibbLGAOI=
   </data>
  </layer>
+ <objectgroup id="2" name="объекты" opacity="0" offsetx="2" offsety="-5.47478">
+  <object id="9" name="border" x="399.667" y="149.475" width="1070.33" height="154" visible="0"/>
+  <object id="22" name="cam" x="402" y="199.475">
+   <point/>
+  </object>
+ </objectgroup>
 </map>
