@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="110" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="23">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="110" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="102">
  <tileset firstgid="1" name="tiles" tilewidth="90" tileheight="83" spacing="2" tilecount="22" columns="22">
   <image source="tiles.png" width="2048" height="128"/>
   <tile id="18">
@@ -24,13 +24,56 @@
  </tileset>
  <layer id="1" name="Слой тайлов 1" width="110" height="29" offsetx="6.47872" offsety="5.50395">
   <data encoding="base64" compression="zlib">
-   eJzt1sEKgCAMANAKO3aI+v9vDc8hlNWMeu/kQdimG9p1AAAAAAAAALzN2joBdv56J1+qO7VOgFeI6ukvzU7WH9iTCuuSoTKXGktgLIAac3C8MTjenc6+H9MjWZBdOdvonj/ryIxE1xD5dwLibbLGAOI=
+   eJzt00EKgCAABMAIO3aI+v9be0AUYeGizJy8yK7CThMAAAAAAADAsyNdAIix/6uSLkAXbKdeuTl/sVfem3/KB/qyBDK3xnmJN6as6QIDG/lv32yk9W6BsZ3lHQCp
   </data>
  </layer>
- <objectgroup id="2" name="объекты" opacity="0" offsetx="2" offsety="-5.47478">
-  <object id="9" name="border" x="399.667" y="149.475" width="1070.33" height="154" visible="0"/>
-  <object id="22" name="cam" x="402" y="199.475">
-   <point/>
+ <objectgroup id="3" name="сеттинг" offsetx="6" offsety="2">
+  <object id="101" name="hero" x="411.667" y="291.333" width="41" height="63">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="2" name="объекты" opacity="0.97" offsetx="2" offsety="-5.47478">
+  <properties>
+   <property name="BodyType" value="StaticBody"/>
+   <property name="gravityScale" type="float" value="1"/>
+  </properties>
+  <object id="90" x="1.33333" y="361.475" width="1755.33" height="108">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="91" x="758" y="321.142" width="53.3333" height="42">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="92" x="808.667" y="293.141" width="53.3333" height="70">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="94" x="1324.67" y="307.475" width="36" height="55.3333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="95" x="-2.66667" y="4.80811" width="3.33333" height="357.333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="96" x="1753.33" y="4.14145" width="4.66667" height="359.333" visible="0">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+   </properties>
   </object>
  </objectgroup>
 </map>
