@@ -9,10 +9,16 @@ import com.badlogic.gdx.physics.box2d.*;
 public class PhysX {
     private final World world;
     private final Box2DDebugRenderer debugRenderer;
+    public final float PPM = 1;
 
     public PhysX() {
         world = new World(new Vector2(0, -9.81f), true);
+        world.setContactListener(new MyContList());
         debugRenderer = new Box2DDebugRenderer();
+    }
+
+    public void deleteBody(Body body) {
+        world.destroyBody(body);
     }
 
     public Body addObject(RectangleMapObject object) {
@@ -23,23 +29,31 @@ public class PhysX {
         FixtureDef fdef = new FixtureDef();
         PolygonShape polygonShape = new PolygonShape();
 
-        if(type.equals("StaticBody"))  def.type = BodyDef.BodyType.StaticBody;
-        if(type.equals("DynamicBody"))   def.type = BodyDef.BodyType.DynamicBody;
+//        if(type.equals("StaticBody"))  def.type = BodyDef.BodyType.StaticBody;
+//        if(type.equals("DynamicBody"))   def.type = BodyDef.BodyType.DynamicBody;
 
-       // def.type = BodyDef.BodyType.StaticBody;
-        def.position.set(rect.x + rect.width / 2, rect.y + rect.height / 2);
+        def.type = type.equals("StaticBody") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody;
+
+        def.position.set(rect.x + rect.width / 2 / PPM, rect.y + rect.height / 2 / PPM);
         def.gravityScale = 1;
 
-        polygonShape.setAsBox(rect.width / 2, rect.height / 2);
+        polygonShape.setAsBox(rect.width / 2 / PPM, rect.height / 2 / PPM);
 
         fdef.shape = polygonShape; //форма
         fdef.friction = 0; // скольжение
         fdef.density = 1; // плотность
         fdef.restitution = 0; // прыгучесть
-      //  world.createBody(def).createFixture(fdef).setUserData("припятствие");
+        //  world.createBody(def).createFixture(fdef).setUserData("припятствие");
         Body body;
         body = world.createBody(def);
-        body.createFixture(fdef).setUserData("препятствие");
+        String name = object.getName();
+        body.createFixture(fdef).setUserData(name);
+        if (name!= null && name.equals("hero")) {
+            polygonShape.setAsBox(rect.width / 12 / PPM, rect.height / 12 / PPM, new Vector2(0,-rect.width / 2 / PPM), 0);
+            body.createFixture(fdef).setUserData("legs");
+            body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);
+        }
+
         polygonShape.dispose();
         return body;
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="110" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="102">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="110" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="105">
  <tileset firstgid="1" name="tiles" tilewidth="90" tileheight="83" spacing="2" tilecount="22" columns="22">
   <image source="tiles.png" width="2048" height="128"/>
   <tile id="18">
@@ -28,7 +28,7 @@
   </data>
  </layer>
  <objectgroup id="3" name="сеттинг" offsetx="6" offsety="2">
-  <object id="101" name="hero" x="411.667" y="291.333" width="41" height="63">
+  <object id="101" name="hero" x="411" y="324.666" width="41" height="37.6667">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
    </properties>
@@ -73,6 +73,21 @@
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="102" name="jellyfish" x="895.333" y="244.141" width="43.3333" height="38">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="103" name="jellyfish" x="1259.33" y="306.141" width="46" height="38.6667">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+   </properties>
+  </object>
+  <object id="104" name="jellyfish" x="1469.33" y="275.475" width="48.6667" height="44">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
    </properties>
   </object>
  </objectgroup>

@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.GameSounds;
 import com.mygdx.game.Main;
 
 public class MenuScreen implements Screen {
@@ -18,14 +20,20 @@ public class MenuScreen implements Screen {
     private final Texture img;
     private final Rectangle startRect;
     private final ShapeRenderer shapeRenderer;
+    private Music music;
+    private  GameSounds gameSounds;
 
     public MenuScreen(Main game) {
         this.game = game;
         batch = new SpriteBatch();
-        img = new Texture("screen2.jpg");
+        img = new Texture("startScreen.png");
         startRect = new Rectangle(0, 0, img.getWidth(), img.getHeight());
         shapeRenderer = new ShapeRenderer();
-
+//        music = Gdx.audio.newMusic(Gdx.files.internal("music/intro.mp3"));
+//        music.setLooping(true);
+//        music.play();
+        gameSounds = new GameSounds();
+        gameSounds.playIntroMusic();
     }
 
     @Override
@@ -49,7 +57,6 @@ public class MenuScreen implements Screen {
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             int x = Gdx.input.getX();
             int y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            Vector2 vect = new Vector2(x, y);
             if (startRect.contains(x, y)) {
                 dispose();
                 game.setScreen(new GameScreen(game));
@@ -83,5 +90,6 @@ public class MenuScreen implements Screen {
         this.batch.dispose();
         this.img.dispose();
         this.shapeRenderer.dispose();
+        gameSounds.disposeIntroMusic();
     }
 }
