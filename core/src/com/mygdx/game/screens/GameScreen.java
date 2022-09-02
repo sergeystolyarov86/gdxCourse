@@ -3,7 +3,6 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -19,8 +18,12 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Anim;
+import com.mygdx.game.GameSounds;
 import com.mygdx.game.Main;
 import com.mygdx.game.PhysX;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GameScreen implements Screen {
@@ -41,14 +44,18 @@ public class GameScreen implements Screen {
     private PhysX physX;
     private Body body;
     private final Rectangle heroRect;
+    public static List<Body> bodies;
+    private final GameSounds gameSounds;
 
     public GameScreen(Main game) {
+        bodies = new ArrayList<>();
         this.game = game;
         shapeRenderer = new ShapeRenderer();
         img = new Texture("gameScene.png");
         startRect = new Rectangle(0, 0, img.getWidth(), img.getHeight());
         batch = new SpriteBatch();
         animation = new Anim("atlas/bob.atlas", "bobRun", Animation.PlayMode.LOOP);
+
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.99f;
         map = new TmxMapLoader().load("map/map.tmx");
@@ -68,6 +75,9 @@ public class GameScreen implements Screen {
         for (int i = 0; i < objects.size; i++) {
             physX.addObject(objects.get(i));
         }
+        gameSounds = new GameSounds();
+        gameSounds.playGameMusic();
+
     }
 
     @Override
@@ -84,25 +94,24 @@ public class GameScreen implements Screen {
 
 
         ScreenUtils.clear(0, 0, 1, 0);
-        camera.position.x = body.getPosition().x;
-        camera.position.y = body.getPosition().y+130;
+        camera.position.x = body.getPosition().x*physX.PPM;
+        camera.position.y = body.getPosition().y*physX.PPM+139;
         camera.update();
-        //  float x = Gdx.input.getX() - animation.getFrame().getRegionWidth();
-        //   float y = Gdx.graphics.getHeight() - Gdx.input.getY() - animation.getFrame().getRegionHeight();
+
 
         animation.setTime(Gdx.graphics.getDeltaTime());
         batch.setProjectionMatrix(camera.combined);
-        heroRect.x = body.getPosition().x - heroRect.width / 2 - 35;
+        heroRect.x = body.getPosition().x - heroRect.width / 2 ;
         heroRect.y = body.getPosition().y - heroRect.height / 2;
 
         batch.begin();
         moveBob();
-        batch.draw(img, -450, 0);
+        batch.draw(img, -45, 0);
         batch.draw(animation.getFrame(), heroRect.x, heroRect.y);     //y 105
         batch.end();
         mapRenderer.setView(camera);
         mapRenderer.render(bg);
-        if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             dispose();
             game.setScreen(new MenuScreen(game));
         }
@@ -112,6 +121,11 @@ public class GameScreen implements Screen {
 
         physX.step();
         physX.debugDraw(camera);
+
+        for (Body value : bodies) {
+            physX.deleteBody(value);
+        }
+        bodies.clear();
 
     }
 
@@ -131,8 +145,10 @@ public class GameScreen implements Screen {
             }
             body.applyForceToCenter(new Vector2(100000,0),true);
 
+        } if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            gameSounds.jumpSound();
+            body.applyForceToCenter(new Vector2(0,100000),true);
         }
-
     }
 
     @Override
@@ -162,5 +178,6 @@ public class GameScreen implements Screen {
         this.img.dispose();
         this.shapeRenderer.dispose();
         animation.dispose();
+        gameSounds.disposeGameMusic();
     }
 }
