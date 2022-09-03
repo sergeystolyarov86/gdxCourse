@@ -28,7 +28,7 @@ import java.util.List;
 
 public class GameScreen implements Screen {
 
-    private static final float STEP = 1f;
+    //  private static final float STEP = 1f;
     Anim animation;
     private boolean lookRight = true;
     private final Main game;
@@ -51,7 +51,7 @@ public class GameScreen implements Screen {
         bodies = new ArrayList<>();
         this.game = game;
         shapeRenderer = new ShapeRenderer();
-        img = new Texture("gameScene.png");
+        img = new Texture("game.png");
         startRect = new Rectangle(0, 0, img.getWidth(), img.getHeight());
         batch = new SpriteBatch();
         animation = new Anim("atlas/bob.atlas", "bobRun", Animation.PlayMode.LOOP);
@@ -92,22 +92,24 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.M)) camera.zoom += 0.1f;
 
 
-
         ScreenUtils.clear(0, 0, 1, 0);
-        camera.position.x = body.getPosition().x*physX.PPM;
-        camera.position.y = body.getPosition().y*physX.PPM+139;
+        camera.position.x = body.getPosition().x * physX.PPM;
+        camera.position.y = body.getPosition().y * physX.PPM;
         camera.update();
 
 
         animation.setTime(Gdx.graphics.getDeltaTime());
-        batch.setProjectionMatrix(camera.combined);
-        heroRect.x = body.getPosition().x - heroRect.width / 2 ;
+      //   batch.setProjectionMatrix(camera.combined);
+        heroRect.x = body.getPosition().x - heroRect.width / 2;
         heroRect.y = body.getPosition().y - heroRect.height / 2;
+
+        float x = Gdx.graphics.getWidth() / 2 - heroRect.getWidth() / 2 / camera.zoom;
+        float y = Gdx.graphics.getHeight() / 2 - heroRect.getHeight() / 2 / camera.zoom;
 
         batch.begin();
         moveBob();
-        batch.draw(img, -45, 0);
-        batch.draw(animation.getFrame(), heroRect.x, heroRect.y);     //y 105
+        batch.draw(img, 0, 0); // -45 x
+        batch.draw(animation.getFrame(), x, y - 135);     //y 105
         batch.end();
         mapRenderer.setView(camera);
         mapRenderer.render(bg);
@@ -116,11 +118,10 @@ public class GameScreen implements Screen {
             game.setScreen(new MenuScreen(game));
         }
 
-
         mapRenderer.render(l1); //отрисовка слоев в массиве l1
 
-        physX.step();
-        physX.debugDraw(camera);
+      physX.step();
+      physX.debugDraw(camera);
 
         for (Body value : bodies) {
             physX.deleteBody(value);
@@ -131,23 +132,25 @@ public class GameScreen implements Screen {
 
     public void moveBob() {
 
+
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             if (!animation.getFrame().isFlipX()) {
                 animation.getFrame().flip(true, false);
             }
-            body.applyForceToCenter(new Vector2(-100000,0),true);
-            }
+            body.applyForceToCenter(new Vector2(-0.3f, 0), true);
+        }
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             if (animation.getFrame().isFlipX()) {
                 animation.getFrame().flip(true, false);
             }
-            body.applyForceToCenter(new Vector2(100000,0),true);
+            body.applyForceToCenter(new Vector2(0.3f, 0), true);
 
-        } if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && physX.myContList.isOnGround()) {
             gameSounds.jumpSound();
-            body.applyForceToCenter(new Vector2(0,100000),true);
+            body.applyForceToCenter(new Vector2(0, 15f), true);
         }
     }
 
