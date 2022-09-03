@@ -8,6 +8,7 @@ public class GameSounds {
     private Music gameMusic;
     private Music introMusic;
     private Sound jump;
+    private Sound catchJellyFish;
 
     public void playGameMusic() {
         gameMusic = Gdx.audio.newMusic(Gdx.files.internal("music/gameMusic.mp3"));
@@ -25,6 +26,10 @@ public class GameSounds {
     public void jumpSound() {
         jump = Gdx.audio.newSound(Gdx.files.internal("music/jump.mp3"));
         jump.play(0.1f,0.8f,0);
+    }
+    public void jellyFishSound() {
+        catchJellyFish = Gdx.audio.newSound(Gdx.files.internal("music/catch.mp3"));
+        catchJellyFish.play(0.5f,1,0);
     }
 
     public void disposeGameMusic() {

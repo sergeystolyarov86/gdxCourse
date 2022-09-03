@@ -5,6 +5,7 @@ import com.mygdx.game.screens.GameScreen;
 
 public class MyContList implements ContactListener {
     public int count;
+    private GameSounds gameSounds = new GameSounds();
 
     @Override
     public void beginContact(Contact contact) {
@@ -26,6 +27,12 @@ public class MyContList implements ContactListener {
             if (tmpB.equals("hero") && tmpA.equals("floor")) {
                 count++;
             }
+            if (tmpA.equals("hero") && tmpB.equals("jellyfish")) {
+                gameSounds.jellyFishSound();
+            }
+            if (tmpB.equals("jellyfish") && tmpA.equals("floor")) {
+                gameSounds.jellyFishSound();
+            }
 
         }
 
@@ -45,6 +52,7 @@ public class MyContList implements ContactListener {
             if (tmpB.equals("hero") && tmpA.equals("floor")) {
                 count--;
             }
+
         }
     }
 
