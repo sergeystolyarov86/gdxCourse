@@ -8,7 +8,7 @@ import com.mygdx.game.screens.MenuScreen;
 public class Main extends Game {
     @Override
     public void create() {
-        Gdx.graphics.setWindowedMode(800, 528);
+      Gdx.graphics.setWindowedMode(800, 526);
         setScreen(new MenuScreen(this));
     }
 
