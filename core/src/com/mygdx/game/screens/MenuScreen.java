@@ -2,8 +2,7 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,85 +10,80 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.GameSounds;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Main;
+import com.mygdx.game.audio.GameAudio;
 
-public class MenuScreen implements Screen {
+public final class MenuScreen extends ScreenAdapter {
+
+    private static final String BACKGROUND = "startScreen.png";
+
     private final Main game;
-    private final SpriteBatch batch;
-    private final Texture img;
-    private final Rectangle startRect;
-    private final ShapeRenderer shapeRenderer;
-    private Music music;
-    private  GameSounds gameSounds;
+    private final SpriteBatch batch = new SpriteBatch();
+    private final ShapeRenderer shapes = new ShapeRenderer();
+    private final Viewport viewport = new FitViewport(Main.VIRTUAL_WIDTH, Main.VIRTUAL_HEIGHT);
+    private final Texture background = new Texture(BACKGROUND);
+    private final Rectangle startButton;
+    private final Vector2 pointer = new Vector2();
 
     public MenuScreen(Main game) {
         this.game = game;
-        batch = new SpriteBatch();
-        img = new Texture("startScreen.png");
-        startRect = new Rectangle(0, 0, img.getWidth(), img.getHeight());
-        shapeRenderer = new ShapeRenderer();
-//        music = Gdx.audio.newMusic(Gdx.files.internal("music/intro.mp3"));
-//        music.setLooping(true);
-//        music.play();
-        gameSounds = new GameSounds();
-        gameSounds.playIntroMusic();
+        startButton = new Rectangle(0, 0, Main.VIRTUAL_WIDTH, Main.VIRTUAL_HEIGHT);
     }
 
     @Override
     public void show() {
-
+        game.getAudio().playMusic(GameAudio.Track.MENU);
     }
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.YELLOW);
-
-        batch.begin();
-        batch.draw(img, 0, 0);
-        batch.end();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(startRect.x, startRect.y, startRect.width, startRect.height);
-        shapeRenderer.end();
-
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            int x = Gdx.input.getX();
-            int y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            if (startRect.contains(x, y)) {
-                dispose();
-                game.setScreen(new GameScreen(game));
-            }
+        if (isStartRequested()) {
+            game.startGame();
+            return; // этот экран уже освобождён
         }
 
+        ScreenUtils.clear(Color.YELLOW);
+        viewport.apply();
+
+        batch.setProjectionMatrix(viewport.getCamera().combined);
+        batch.begin();
+        batch.draw(background, 0, 0, Main.VIRTUAL_WIDTH, Main.VIRTUAL_HEIGHT);
+        batch.end();
+
+        shapes.setProjectionMatrix(viewport.getCamera().combined);
+        shapes.begin(ShapeRenderer.ShapeType.Line);
+        shapes.setColor(Color.BLACK);
+        shapes.rect(startButton.x, startButton.y, startButton.width, startButton.height);
+        shapes.end();
+    }
+
+    private boolean isStartRequested() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            return true;
+        }
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            viewport.unproject(pointer.set(Gdx.input.getX(), Gdx.input.getY()));
+            return startButton.contains(pointer);
+        }
+        return false;
     }
 
     @Override
     public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
+        viewport.update(width, height, true);
     }
 
     @Override
     public void hide() {
-
+        game.getAudio().stopMusic();
     }
 
     @Override
     public void dispose() {
-        this.batch.dispose();
-        this.img.dispose();
-        this.shapeRenderer.dispose();
-        gameSounds.disposeIntroMusic();
+        batch.dispose();
+        shapes.dispose();
+        background.dispose();
     }
 }

@@ -6,57 +6,57 @@ filter: Nearest, Nearest
 repeat: none
 bobRun
   rotate: false
-  xy: 0, 314
-  size: 90, 74
-  orig: 90, 80
+  xy: 0, 0
+  size: 92, 94
+  orig: 92, 94
   offset: 0, 0
   index: 7
 bobRun
   rotate: false
-  xy: 0, 239
-  size: 90, 73
-  orig: 90, 80
+  xy: 94, 0
+  size: 92, 94
+  orig: 92, 94
   offset: 0, 0
   index: 1
 bobRun
   rotate: false
-  xy: 92, 311
-  size: 90, 77
-  orig: 90, 80
+  xy: 0, 96
+  size: 92, 94
+  orig: 92, 94
   offset: 0, 0
   index: 6
 bobRun
   rotate: false
-  xy: 0, 157
-  size: 90, 80
-  orig: 90, 80
+  xy: 94, 96
+  size: 92, 94
+  orig: 92, 94
   offset: 0, 0
   index: 3
 bobRun
   rotate: false
-  xy: 92, 232
-  size: 90, 77
-  orig: 90, 80
+  xy: 0, 192
+  size: 92, 94
+  orig: 92, 94
   offset: 0, 0
   index: 5
 bobRun
   rotate: false
-  xy: 0, 75
-  size: 90, 80
-  orig: 90, 80
+  xy: 94, 192
+  size: 92, 94
+  orig: 92, 94
   offset: 0, 0
   index: 2
 bobRun
   rotate: false
-  xy: 92, 150
-  size: 88, 80
-  orig: 90, 80
-  offset: 1, 0
+  xy: 0, 288
+  size: 92, 94
+  orig: 92, 94
+  offset: 0, 0
   index: 4
 bobRun
   rotate: false
-  xy: 0, 0
-  size: 86, 73
-  orig: 90, 80
+  xy: 94, 288
+  size: 92, 94
+  orig: 92, 94
   offset: 0, 0
   index: 8
